@@ -25,6 +25,15 @@ export class ZipInCloudService {
       });
   }
 
+  obterSeq(codigo: any) {
+    return this.http
+      .get(environment.url + "SEQ_tabela/obterPorCodigo/" + codigo)
+      .toPromise()
+      .then((res) => {
+        return res;
+      });
+  }  
+
   obterUsuarios() {
     return this.http
       .get(environment.url + "Usuarios/obterTodos/")
@@ -215,7 +224,7 @@ export class ZipInCloudService {
 
   ObterPorCep(cep: any) {
     return this.http
-      .get(`http://zclub.com.br:35789/api/localizacao/viacep/${cep}`)
+      .get(`http://zclub.com.br:56435/api/localizacao/viacep/${cep}`)
       .toPromise()
       .then((res) => {
         return res;
