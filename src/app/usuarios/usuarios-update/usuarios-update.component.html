@@ -1,0 +1,73 @@
+<div class="container mat-elevation-z8">
+  <form
+    class="form"
+    #cadastroUsuario="ngForm"
+    (ngSubmit)="onSubmit(cadastroUsuario.value)"
+    enctype="multipart/form-data"
+  >
+    <h1 class="fullWidth">Alterar Usuário</h1>
+    <img class="fullWidth" src="assets/img/tecnico-create.svg" />
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Login</mat-label>
+      <input
+        name="nome"
+        [(ngModel)]="usuario.nome"
+        required
+        matInput
+        placeholder="Ex.. macorattiadm"
+        maxlength="50"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Senha</mat-label>
+      <input
+        name="senha"
+        [(ngModel)]="usuario.senha"
+        [type]="hide ? 'password' : 'text'"
+        required
+        matInput
+        placeholder="Ex.. Senh@123"
+      />
+      <mat-icon matSuffix (click)="hide = !hide">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Tipo</mat-label>
+      <select [(ngModel)]="usuario.role" name="role" matNativeControl required>
+        <option value="1">Admin</option>
+        <option value="2">Operador</option>
+      </select>
+    </mat-form-field>
+
+    <section class="section">
+      <mat-checkbox [(ngModel)]="usuario.ativo" name="ativo"
+        >Ativo</mat-checkbox
+      >
+    </section>
+
+    <button
+      type="submit"
+      class="fullWidth mat-elevation-z4"
+      mat-flat-button
+      [ngStyle]="{'background-color': corBotao}"
+      [disabled]="IsDisabled"
+    >
+      Atualizar
+    </button>
+    <button
+      routerLink="/listusers"
+      class="fullWidth mat-elevation-z4"
+      mat-stroked-button
+      color="warn"
+    >
+      Cancelar
+    </button>
+  </form>
+
+  <p class="fullWidth">Powered By: ZiP Software© 2022</p>
+</div>

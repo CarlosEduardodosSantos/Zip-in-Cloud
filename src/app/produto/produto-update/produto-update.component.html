@@ -1,0 +1,184 @@
+<div class="container mat-elevation-z8">
+    
+    <form
+      class="form"
+      #cadastroGrupo="ngForm"
+      (ngSubmit)="onSubmit(cadastroGrupo.value)"
+      enctype="multipart/form-data"
+    >
+      <h1 class="fullWidth">Alterar Produto</h1>
+
+      <div class="imageContainer">
+        <div class="form-group">
+          <img
+            (click)="abrir(img.src)"
+            id="img"
+            #img
+            name="prod_img"
+            class="produtoImagem preview"
+            [src]="produto.prod_img !== null
+            ? 'data:image/png;base64,' + produto.prod_img
+            : imageBinding"
+            [(ngModel)]="img.src"
+          />
+          <div>
+            <label for="file" class="btn" style="cursor: pointer;"
+              >Adicionar uma <strong class="underline">imagem</strong> ao
+              produto</label
+            >
+            <input
+              name="file"
+              id="file"
+              type="file"
+              accept="image/*"
+              hidden
+              #file
+              (change)="adicionarImagem(file)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Nome</mat-label>
+        <input
+          name="deS_"
+          [(ngModel)]="produto.deS_"
+          required
+          matInput
+          placeholder="Ex.. Hot dogs"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Grupo</mat-label>
+        <mat-select name="grupo" ngModel
+        [(value)]="_grupo"
+        required
+        matInput>
+          <mat-option *ngFor="let grupo of grupos.results" [value]="grupo.grupo">
+            {{grupo.deS_}}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>local_offer</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Tipo</mat-label>
+        <mat-select name="tipo" ngModel
+        [(value)]="_tipo"
+        required
+        matInput>
+          <mat-option *ngFor="let tipo of tipos.results" [value]="tipo.tipo">
+            {{tipo.deS_}}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>local_pizza</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Quantidade Estoque</mat-label>
+        <input
+          name="qtdE1"
+          [(ngModel)]="produto.qtdE1"
+          [allowNegativeNumbers]="true"
+          mask="separator.0"
+          thousandSeparator="."
+          required
+          matInput
+          placeholder="Ex.. 20"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>grid_on</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Valor Custo</mat-label>
+        <input
+          name="vlcusto"
+          [(ngModel)]="produto.vlcusto"
+          prefix="R$ "
+          mask="separator.2"
+          thousandSeparator="."
+          matInput
+          placeholder="Ex.. 30.00"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Valor Venda</mat-label>
+        <input
+          name="vlvenda"
+          [(ngModel)]="produto.vlvenda"
+          prefix="R$ "
+          mask="separator.2"
+          thousandSeparator="."
+          required
+          matInput
+          placeholder="Ex.. 50"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Valor Entrega</mat-label>
+        <input
+          name="vlentrega"
+          [(ngModel)]="produto.vlentrega"
+          prefix="R$ "
+          mask="separator.2"
+          thousandSeparator="."
+          matInput
+          placeholder="Ex.. 20.00"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>motorcycle</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" appearance="legacy">
+        <mat-label>Valor Promoção</mat-label>
+        <input
+          name="vlvendA2"
+          [(ngModel)]="produto.vlvendA2"
+          prefix="R$ "
+          mask="separator.2"
+          thousandSeparator="."
+          matInput
+          placeholder="Ex.. 20.00"
+          maxlength="50"
+        />
+        <mat-icon matSuffix>money_off</mat-icon>
+      </mat-form-field>
+
+      <section class="section">
+        <mat-checkbox [ngModel]="isAtivo(produto.ativo)" name="ativo"
+          >Ativo</mat-checkbox
+        >
+      </section>
+  
+      <button
+        type="submit"
+        class="fullWidth mat-elevation-z4"
+        mat-flat-button
+        [ngStyle]="{'background-color': corBotao}"
+        [disabled]="IsDisabled"
+      >
+      Atualizar
+      </button>
+      <button
+        routerLink="/listproduto"
+        class="fullWidth mat-elevation-z4"
+        mat-stroked-button
+        color="warn"
+      >
+        Cancelar
+      </button>
+    </form>
+  
+    <p class="fullWidth">Powered By: ZiP Software© 2022</p>
+  </div>

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/ngx-toastr/toastr.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Altera a cor dos botões confirmar, atualizar e novo */
+.cad {
+    background: linear-gradient(180deg, #02F73E 0%, #14E008 100%);
+    color: white;
+}
+
+.ConfirmarExclu {
+    position: relative;
+    background: linear-gradient(180deg, #02F73E 0%, #14E008 100%);
+    color: white;
+    bottom: 20px;
+    left: 130px;
+    width: 100px;
+    height: 40px;
+  }
+
+  .CancelarExclu {
+    position: relative;
+    color: red;
+    bottom: 20px;
+    width: 100px;
+    left: 220px;
+    height: 40px;
+  }

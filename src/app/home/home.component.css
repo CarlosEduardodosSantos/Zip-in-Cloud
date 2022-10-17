@@ -1,0 +1,26 @@
+.card {
+  width: 90%;
+  margin: 1rem auto;
+  background-color: rgb(235, 235, 235);
+}
+
+img {
+  height: 20rem;
+}
+
+p {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin-top: 1rem;
+  border: 1px solid rgb(161, 159, 159);
+  padding: 1rem 10%;
+  border-radius: 2rem;
+}

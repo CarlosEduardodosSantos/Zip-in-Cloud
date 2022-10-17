@@ -1,0 +1,204 @@
+<div class="container mat-elevation-z8">
+  <form
+    class="form"
+    #alterarCliente="ngForm"
+    (ngSubmit)="onSubmit(alterarCliente.value)"
+    enctype="multipart/form-data"
+  >
+    <h1 class="fullWidth">Alterar Cliente</h1>
+    <img
+      class="fullWidth"
+      src="assets/img/tecnico-create.svg"
+      alt="Help Desk - Dicas de um DEV"
+    />
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Nome</mat-label>
+      <input
+        name="nome"
+        [(ngModel)]="cliente.nome"
+        required
+        matInput
+        placeholder="Ex.. macorattiadm"
+        maxlength="50"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <p style="margin-top: 12px;">Tipo de pessoa:</p>
+    <mat-radio-group aria-label="Select an option" name="tipo" class="TESTE">
+      <mat-radio-button 
+      value="1" 
+      (change)="verificarCheckbox(cpfID)" 
+      style="padding-left: 80px;" 
+      #cpfID 
+      [checked] = "checked1"
+      >Pessoa Física</mat-radio-button>
+
+      <mat-radio-button 
+      value="2" 
+      (change)="verificarCheckbox(cnpjID)" 
+      #cnpjID 
+      [checked] = "checked2"
+      class="CNPJ"
+      >Pessoa jurídica</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="fullWidth" appearance="legacy" style="padding-top: 9px;">
+      <mat-label>CPF / CNPJ</mat-label>
+      <input
+        name="cpf"
+        [(ngModel)]="cliente.cpf"
+        (keyup)="Verificar($event)"
+        class="teste"
+        [mask]="MascaraCPF"
+        [dropSpecialCharacters]="false"
+        required
+        matInput
+        placeholder="Ex.. 111.111.111-11"
+      />
+      <mat-icon matSuffix>business_center</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>RG / I.E</mat-label>
+      <input
+        name="rg"
+        [(ngModel)]="cliente.rg"
+        [mask]="MascaraRG"
+        [dropSpecialCharacters]="false"
+        required
+        matInput
+        placeholder="Ex.. 12.345.678-9"
+      />
+      <mat-icon matSuffix>fingerprint</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Telefone</mat-label>
+      <input
+        name="fone"
+        [(ngModel)]="cliente.fone"
+        mask="(00) 0000-0000||(00) 00000-0000"
+        [dropSpecialCharacters]="false"
+        required
+        matInput
+        placeholder="Ex.. (11) 12345-6789"
+      />
+      <mat-icon matSuffix>perm_phone_msg</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>E-mail</mat-label>
+      <input
+        name="email"
+        [(ngModel)]="cliente.email"
+        email="true"
+        required
+        matInput
+        placeholder="Ex.. Email@exemplo.com"
+      />
+      <mat-icon matSuffix>alternate_email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>CEP</mat-label>
+      <input
+        name="cep"
+        [(ngModel)]="cliente.cep"
+        (keyup)="procurar()"
+        mask="00000-000"
+        required
+        matInput
+        placeholder="Ex.. 14340-000"
+      />
+      <mat-icon matSuffix>add_location</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Endereço</mat-label>
+      <input
+        name="endereco"
+        [(ngModel)]="cliente.endereco"
+        required
+        matInput
+        placeholder="Ex.. Rua Lídio de Oliveira Valada, 465"
+      />
+      <mat-icon matSuffix>business</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Complemento</mat-label>
+      <input
+        name="complemento"
+        [(ngModel)]="cliente.complemento"
+        matInput
+        placeholder="Ex.. Bloco A, numero 16"
+      />
+      <mat-icon matSuffix>layers icon</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Bairro</mat-label>
+      <input
+        name="bairro"
+        [(ngModel)]="cliente.bairro"
+        required
+        matInput
+        placeholder="Ex.. Jardim Sao Luiz"
+      />
+      <mat-icon matSuffix>my_location </mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Cidade</mat-label>
+      <input
+        name="cidade"
+        [(ngModel)]="cliente.cidade"
+        required
+        matInput
+        placeholder="Ex.. Ribeirão Preto"
+      />
+      <mat-icon matSuffix>location_city</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="legacy">
+      <mat-label>Estado</mat-label>
+      <input
+        name="uf"
+        [(ngModel)]="cliente.uf"
+        required
+        matInput
+        placeholder="Ex.. SP"
+        maxlength="2"
+      />
+      <mat-icon matSuffix>map icon</mat-icon>
+    </mat-form-field>
+
+    <section class="section">
+      <mat-checkbox [(ngModel)]="cliente.ativo" name="ativo"
+        >Ativo</mat-checkbox
+      >
+    </section>
+
+    <button
+      type="submit"
+      class="fullWidth mat-elevation-z4"
+      mat-flat-button
+      [ngStyle]="{'background-color': corBotao}"
+      [disabled]="IsDisabled"
+    >
+    Atualizar
+    </button>
+    <button
+      routerLink="/listcliente"
+      class="fullWidth mat-elevation-z4"
+      mat-stroked-button
+      color="warn"
+    >
+      Cancelar
+    </button>
+  </form>
+
+  <p class="fullWidth">Powered By: ZiP Software© 2022</p>
+</div>

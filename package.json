@@ -1,0 +1,49 @@
+{
+  "name": "zip-in-cloud",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^14.2.4",
+    "@angular/cdk": "^14.2.3",
+    "@angular/common": "^14.2.4",
+    "@angular/compiler": "^14.2.4",
+    "@angular/core": "^14.2.4",
+    "@angular/forms": "^14.2.4",
+    "@angular/material": "^14.2.3",
+    "@angular/platform-browser": "^14.2.4",
+    "@angular/platform-browser-dynamic": "^14.2.4",
+    "@angular/router": "^14.2.4",
+    "angular-confirmation-popover": "^6.0.0",
+    "ngx-color-picker": "^13.0.0",
+    "ngx-mask": "^13.1.15",
+    "ngx-toastr": "^14.3.0",
+    "rxjs": "~7.4.0",
+    "tslib": "^2.4.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.4",
+    "@angular/cli": "^14.2.4",
+    "@angular/compiler-cli": "^14.2.4",
+    "@types/node": "^12.11.1",
+    "typescript": "~4.8.4"
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroSposit0/APIZIP-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroSposit0/APIZIP-/issues"
+  },
+  "homepage": "https://github.com/PedroSposit0/APIZIP-#readme"
+}

@@ -1,0 +1,35 @@
+<div class="container" [ngStyle]="{'background': 'linear-gradient('+corLogin+')'}">
+  <form class="form mat-elevation-z8">
+    <h1>Bem Vindo(a) ao ZiPinCloud!</h1>
+
+    <img src="assets/img/logo_novo.png" alt="Faça seu Login" />
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Usuário</mat-label>
+      <input name="nome" matInput placeholder="Ex. José Delisberto" #nome />
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input
+        required
+        name="senha"
+        type="password"
+        matInput
+        placeholder="Ex. Senha"
+        #senha
+      />
+      <mat-icon matSuffix>password</mat-icon>
+    </mat-form-field>
+
+    <button
+      class="full-width mat-elevation-z4"
+      [ngStyle]="{'background-color': corBotao}"
+      mat-stroked-button
+      (click)="logar(nome.value, senha.value)"
+    >
+      Login
+    </button>
+  </form>
+</div>

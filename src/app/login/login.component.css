@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 30rem;
+  margin: auto;
+  background-color: rgb(235, 235, 235);
+  padding: 4rem 1rem;
+  border-radius: 1rem;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+}
+
+img {
+  height: auto;
+  width: 100%;
+  margin: 1.5rem auto 1.5rem auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  margin-top: 1.5rem;
+  color: black;
+}
+
+mat-icon {
+  opacity: 0.6;
+}

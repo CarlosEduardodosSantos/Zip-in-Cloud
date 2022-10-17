@@ -1,0 +1,102 @@
+.container {
+  height: 100%;
+}
+
+.sidenav {
+  max-width: 40%;
+  width: 13rem;
+  color: white;
+}
+
+.sidenav h3 {
+  text-align: center;
+  margin: -0.5rem auto 1.2rem auto;
+  font-size: large;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  margin: 0.8rem auto 0rem auto;
+}
+
+.sidenav a {
+  color: white;
+}
+
+.sidenav i {
+  margin-right: 0.6rem;
+}
+
+.menu {
+  margin: 1rem 0 0 1rem;
+  color: white;
+}
+
+.plus label {
+  cursor: pointer;
+}
+
+.Barra {
+  display: none;
+
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  display: none;
+  transition: 400ms;
+}
+
+.Barra li {
+  list-style: none;
+  z-index: 14;
+}
+
+.Barra ul {
+  padding: 0;
+  margin: 0;
+  z-index: 14;
+}
+
+#NavBarra {
+  display: none;
+}
+
+#NavBarra:checked ~ .Barra {
+  display: block;
+}
+
+.Barra2 {
+  display: none;
+
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  width: 100%;
+  z-index: -1;
+  text-align: center;
+  display: none;
+  transition: 400ms;
+}
+
+.Barra2 li {
+  list-style: none;
+  z-index: 14;
+}
+
+.Barra2 ul {
+  padding: 0;
+  margin: 0;
+  z-index: 14;
+}
+
+#NavBarra2 {
+  display: none;
+}
+
+#NavBarra2:checked ~ .Barra {
+  display: block;
+}

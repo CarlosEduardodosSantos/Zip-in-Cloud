@@ -1,0 +1,123 @@
+<mat-drawer-container
+  class="container"
+  [ngStyle]="{ 'background-color': corFundo }"
+  autosize
+>
+  <mat-drawer
+    #drawer
+    class="sidenav"
+    mode="side"
+    [ngStyle]="{ background: 'linear-gradient(' + corMenu + ')' }"
+  >
+    <img src="assets/img/Logo_Desenho.png" alt="Imagem de navegação" />
+    <h3>ZiPinCloud</h3>
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="home">
+        <i class="material-icons">home</i>Principal
+      </a>
+
+      <div class="plus">
+        <div>
+          <label for="NavBarra">
+            <a mat-list-item
+              ><i mat-list-item class="material-icons">developer_board</i
+              >Cadastros <mat-icon>keyboard_arrow_down</mat-icon></a
+            >
+          </label>
+        </div>
+
+        <div class="IsAtivo">
+          <input type="checkbox" name="check" id="NavBarra" />
+
+          <div class="Barra" [ngStyle]="{ 'background-color': corIcone }">
+            <ul>
+              <li>
+                <a *ngIf="isAdmin" mat-list-item routerLink="listusers">
+                  <i class="material-icons">supervised_user_circle</i>Usuários
+                </a>
+              </li>
+              <li>
+                <a mat-list-item routerLink="listproduto">
+                  <i class="material-icons">shopping_basket</i>Produtos
+                </a>
+              </li>
+              <li>
+                <a mat-list-item routerLink="listfornec">
+                  <i class="material-icons">domain</i>Fornecedores
+                </a>
+              </li>
+              <li>
+                <a mat-list-item routerLink="listcliente">
+                  <i class="material-icons">account_box</i>Clientes
+                </a>
+              </li>
+              <div class="plus2">
+                <div>
+                  <label for="NavBarra2">
+                    <a mat-list-item
+                      ><i mat-list-item class="material-icons">extension</i
+                      >Auxiliares <mat-icon>keyboard_arrow_down</mat-icon></a
+                    >
+                  </label>
+                </div>
+                <div class="IsAtivo2">
+                  <input type="checkbox" name="check2" id="NavBarra2" />
+
+                  <div
+                    class="Barra"
+                    [ngStyle]="{ 'background-color': corBotao }"
+                  >
+                    <ul>
+                      <li>
+                        <a mat-list-item routerLink="listgrupo">
+                          <i class="material-icons">local_offer</i>Grupos
+                        </a>
+                      </li>
+                      <li>
+                        <a *ngIf="isAdmin" mat-list-item routerLink="listsecao">
+                          <i class="material-icons">flag</i>Seção
+                        </a>
+                      </li>
+                      <li>
+                        <a *ngIf="isAdmin" mat-list-item routerLink="listdepto">
+                          <i class="material-icons">where_to_vote</i
+                          >Departamentos
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a mat-list-item routerLink="config">
+        <i class="material-icons">build</i>Preferências
+      </a>
+      <a
+        mat-list-item
+        href="https://api.whatsapp.com/send?phone=551634421771"
+        target="_blank"
+      >
+        <i class="material-icons">help</i>Precisa de Ajuda?
+      </a>
+      <a mat-list-item (click)="logout()">
+        <i class="material-icons">exit_to_app</i>Sair
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <app-header></app-header>
+    <button
+      [ngStyle]="{ 'background-color': corIcone }"
+      class="menu mat-elevation-z8"
+      mat-icon-button
+      (click)="drawer.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
