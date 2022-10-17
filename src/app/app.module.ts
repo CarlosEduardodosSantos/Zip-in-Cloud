@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import {MatTreeModule} from "@angular/material/tree";
@@ -52,6 +52,8 @@ import { SecaoUpdateComponent } from './secao/secao-update/secao-update.componen
 import { DeptoListComponent } from './depto/depto-list/depto-list.component';
 import { DeptoCreateComponent } from './depto/depto-create/depto-create.component';
 import { DeptoUpdateComponent } from './depto/depto-update/depto-update.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material/core";
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -111,11 +113,15 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     MatSortModule,
     ColorPickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgxMaskModule.forRoot(maskConfig),
     ToastrModule.forRoot({timeOut:2000, closeButton:true, progressBar:true}),
     ConfirmationPopoverModule.forRoot({confirmButtonType: 'danger'}),
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'pt-PT'},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

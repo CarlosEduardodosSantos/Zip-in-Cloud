@@ -143,4 +143,15 @@ export class ClienteUpdateComponent implements OnInit {
   Verificar(event:any) {
     
   }
+  verificaCheckbox(check: any)
+{
+  if(check == true){
+    return "s"
+  }
+  else{
+    return "n"
+  }
 }
+}
+
+

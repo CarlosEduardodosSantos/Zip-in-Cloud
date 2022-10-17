@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { ZipInCloudService } from "src/app/zip-in-cloud.service";
 import { Router } from "@angular/router";
-
+import {MatCalendarCellClassFunction} from '@angular/material/datepicker';
 @Component({
   selector: "app-cliente-create",
   templateUrl: "./cliente-create.component.html",
@@ -20,10 +20,17 @@ export class ClienteCreateComponent implements OnInit {
   checked2: boolean = false
   IsDisabled: boolean = false
   corBotao = localStorage.getItem('corBotao');
+  seq: any;
+  atacado: any;
+  convenio: any;
+  consfinal: any;
+  dtnasc: any;
 
   
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+
+  }
 
   procurar(event: any) {
     console.log(event.target.value);
@@ -38,18 +45,27 @@ export class ClienteCreateComponent implements OnInit {
   }
 
   async onSubmit(data: any) {
-    data.ativo = true;
+    await this.api.obterSeq("cliente").then((data) => {
+      this.seq = data;
+      console.log(this.seq);});
+      data.codigo = this.seq.sequencia;
+    data.ativo = "s";
+    data.dtnasc= this.dtnasc;
+    data.dtcompra="2022-10-17T13:16:16.670Z";
+    data.atacado=this.verificaCheckbox(this.atacado);
+    data.convenio=this.verificaCheckbox(this.convenio);
+    data.consfinal=this.consfinal;
     console.log(data);
 
-    if (data.nome == "" || data.Fone.length != 15 && data.Fone.length != 14) {
+    if (data.nome == "" || data.fone1.length != 15 && data.fone1.length != 14) {
       this.toast.error("Insira todos os dados", "O Cadastro Falhou :(");
     } 
 
     else {
       if (this.checked1 == true) {
-        if (data.cpf.length != 14 || data.rg.length != 12) {
+        if (data.cic.length != 14 || data.rg.length != 12) {
           this.toast.error("CPF ou RG estão incompletos", "O Cadastro Falhou :(");
-          console.log(data.cpf.length)
+          console.log(data.cic.length)
           console.log(data.rg.length)
         }
         else {
@@ -62,7 +78,7 @@ export class ClienteCreateComponent implements OnInit {
         }
       }
       else {
-        if (data.cpf.length != 18 || data.rg.length < 14) {
+        if (data.cic.length != 18 || data.rg.length < 14) {
           this.toast.error("CNPJ ou I.E estão incompletos", "O Cadastro Falhou :(");
         }
         else {
@@ -108,4 +124,16 @@ export class ClienteCreateComponent implements OnInit {
       this.checked2 = true
     }
   }
+
+  verificaCheckbox(check: any)
+  {
+    if(check == true){
+      return "s"
+    }
+    else{
+      return "n"
+    }
+  }
+
+
 }
