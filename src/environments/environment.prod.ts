@@ -4,4 +4,5 @@ export const environment = {
   cnpj: "32759021000181",
   nomeEmpresa: "Il Capo",
   versao: "e-ticket",
+  copyright: "Powered By: ZiP Software © " + new Date().getFullYear(),
 };

@@ -91,7 +91,7 @@ export class ProdutoUpdateComponent implements OnInit {
   }
 
   timeLeft: number = 2;
-  interval;
+  interval: any;
 
   startTimer() {
     this.interval = setInterval(() => {
@@ -124,7 +124,7 @@ export class ProdutoUpdateComponent implements OnInit {
     else return false;
   }
 
-  async abrir(data) {
+  async abrir(data: any) {
     var image = new Image();
     image.src = data;
     const nome = this.produto.deS_;
@@ -132,11 +132,11 @@ export class ProdutoUpdateComponent implements OnInit {
     var w = window.open();
 
     setTimeout(function () {
-      w.document.title = nome;
+      w!.document.title = nome;
       console.log(nome);
     }, 500);
-    w.document.write('<style type="text/css">img{transform: scale(1.3); display: block; margin-left: auto; margin-right: auto; position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;} ' + 'p{text-align: center; color: white; font-family: Roboto, "Helvetica Neue", sans-serif; margin-top: 30px; font-size: x-large;} ' + "body{background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgb(215, 173, 2) 0%, rgb(216, 219, 7) 100%);}</style>");
-    w.document.write(`<p>${this.produto.deS_}<p>`);
-    w.document.write(image.outerHTML);
+    w!.document.write('<style type="text/css">img{transform: scale(1.3); display: block; margin-left: auto; margin-right: auto; position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;} ' + 'p{text-align: center; color: white; font-family: Roboto, "Helvetica Neue", sans-serif; margin-top: 30px; font-size: x-large;} ' + "body{background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgb(215, 173, 2) 0%, rgb(216, 219, 7) 100%);}</style>");
+    w!.document.write(`<p>${this.produto.deS_}<p>`);
+    w!.document.write(image.outerHTML);
   }
 }

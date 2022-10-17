@@ -99,7 +99,7 @@ export class FornecedoresUpdateComponent implements OnInit {
   }
 
   timeLeft: number = 2;
-  interval;
+  interval: any;
 
   startTimer() {
     this.interval = setInterval(() => {
