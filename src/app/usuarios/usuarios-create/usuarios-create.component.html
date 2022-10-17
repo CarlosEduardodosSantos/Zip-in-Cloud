@@ -17,14 +17,14 @@
 
     <mat-form-field class="fullWidth" appearance="legacy">
       <mat-label>Tipo</mat-label>
-      <select ngModel name="role" matNativeControl required>
+      <select ngModel title="Tipo" name="role" matNativeControl required>
         <option value="1">Admin</option>
         <option value="2">Operador</option>
       </select>
     </mat-form-field>
 
     <button type="submit" class="fullWidth mat-elevation-z4" mat-flat-button [ngStyle]="{ 'background-color': corBotao }" [disabled]="IsDisabled">Cadastrar</button>
-    <button routerLink="/listusers" class="fullWidth mat-elevation-z4" mat-stroked-button>Cancelar</button>
+    <button type="button" routerLink="/listusers" class="fullWidth mat-elevation-z4" mat-stroked-button>Cancelar</button>
   </form>
 
   <p class="fullWidth">{{ copyright }}</p>

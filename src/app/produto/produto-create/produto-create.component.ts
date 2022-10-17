@@ -83,7 +83,7 @@ export class ProdutoCreateComponent implements OnInit {
   }
 
   timeLeft: number = 2;
-  interval;
+  interval: any;
 
   startTimer() {
     this.interval = setInterval(() => {
@@ -110,12 +110,12 @@ export class ProdutoCreateComponent implements OnInit {
       sub.complete();
     };
   }
-  async abrir(data) {
+  async abrir(data: any) {
     var image = new Image();
     image.src = data;
 
     var w = window.open();
-    w.document.write('<style type="text/css">img{transform: scale(1.3); display: block; margin-left: auto; margin-right: auto; position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;} ' + "body{background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgb(215, 173, 2) 0%, rgb(216, 219, 7) 100%);}</style>");
-    w.document.write(image.outerHTML);
+    w!.document.write('<style type="text/css">img{transform: scale(1.3); display: block; margin-left: auto; margin-right: auto; position: absolute;margin: auto;top: 0;left: 0;right: 0;bottom: 0;} ' + "body{background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgb(215, 173, 2) 0%, rgb(216, 219, 7) 100%);}</style>");
+    w!.document.write(image.outerHTML);
   }
 }

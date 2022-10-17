@@ -1,115 +1,77 @@
-<div class="Exclusao" [style.display]="DisplayBack" [style.animation]="AnimacaoBack">
-</div>
+<div class="Exclusao" [style.display]="DisplayBack" [style.animation]="AnimacaoBack"></div>
 
 <div class="CardBox" [style.display]="DisplayCard" [style.animation]="AnimacaoCard">
-  <h1 class="Texto">Tem Certeza Que Deseja Fazer <br> A Exclusão Desse Registro?</h1>
-  <button class="ConfirmarExclu"
-  mat-stroked-button
-   [disabled]="IsDisabled"
-   (click) = "deletar(codigoExclu)"
-   >Confirmar</button>
+  <h1 class="Texto">
+    Tem Certeza Que Deseja Fazer <br />
+    A Exclusão Desse Registro?
+  </h1>
+  <button class="ConfirmarExclu" mat-stroked-button [disabled]="IsDisabled" (click)="deletar(codigoExclu)">Confirmar</button>
 
-  <button class="CancelarExclu"
-  mat-stroked-button
-  (click)="Cancelar()" [disabled]="IsDisabled">
-  Cancelar
-  </button>
+  <button class="CancelarExclu" mat-stroked-button (click)="Cancelar()" [disabled]="IsDisabled">Cancelar</button>
 </div>
 
 <div class="container">
-    <h1>Cadastro De Produtos</h1>
-  
-    <mat-form-field appearance="standard">
-      <mat-label>Filtro</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Ex. diego importações"
-        #input
-      />
-    </mat-form-field>
-  
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
-        <ng-container matColumnDef="codigo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
-          <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="deS_">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-          <td mat-cell *matCellDef="let element">{{ element.deS_ }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="qtdE1">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</th>
-          <td mat-cell *matCellDef="let element">{{element.qtdE1}}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="vlvenda">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
-          <td mat-cell *matCellDef="let element">{{converterCurrency(element.vlvenda) }}</td>
-        </ng-container>
-  
-        <ng-container matColumnDef="ativo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
-          <td mat-cell *matCellDef="let element; let i = index">
-            <mat-checkbox
-              [ngModel]="isAtivo(element.ativo)"
-              disabled
-            ></mat-checkbox>
-          </td>
-        </ng-container>
+  <h1>Cadastro De Produtos</h1>
 
-        <ng-container matColumnDef="imagem">
-            <th mat-header-cell *matHeaderCellDef>Imagem</th>
-            <td mat-cell *matCellDef="let element">
-                <img
-                (click)="abrir(
-                    element.prod_img !== null
-                    ? 'data:image/png;base64,' + element.prod_img
-                    : '/assets/semimagem.jpg',
-                    element.deS_
-                    )
-                "
-                class="img-Table"
-                [src]="
-                  element.prod_img !== null
-                    ? 'data:image/png;base64,' + element.prod_img
-                    : '/assets/semimagem.jpg'
-                "
-              />
-            </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="acoes">
-          <th mat-header-cell *matHeaderCellDef>Ações</th>
-          <td mat-cell *matCellDef="let element">
-            <a routerLink="/updateproduto/{{ element.codigo }}">
-              <i class="material-icons edit">edit</i>
-            </a>
-            <button (click)="ApareceCard(element.codigo)" class="deletebtn">
-              <i class="material-icons delete">delete</i>
-            </button>
-          </td>
-        </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-  
-      <mat-paginator
-        [pageSizeOptions]="[5, 2, 10, 20, 50, 100]"
-        showFirstLastButtons
-      ></mat-paginator>
+  <mat-form-field appearance="standard">
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. diego importações" #input />
+  </mat-form-field>
 
-      <button
-      routerLink="/createproduto"
-      class="mat-elevation-z8"
-      mat-stroked-button
-      [ngStyle]="{'background-color': corBotao}"
-    >
-      Novo Produto
-    </button>
-    </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+        <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deS_">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.deS_ }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtdE1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</th>
+        <td mat-cell *matCellDef="let element">{{ element.qtdE1 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vlvenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
+        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ativo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <mat-checkbox [ngModel]="isAtivo(element.ativo)" disabled></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="imagem">
+        <th mat-header-cell *matHeaderCellDef>Imagem</th>
+        <td mat-cell *matCellDef="let element">
+          <img title="Produto imagem" (click)="abrir(element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg', element.deS_)" class="img-Table" [src]="element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg'" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let element">
+          <a routerLink="/updateproduto/{{ element.codigo }}">
+            <i class="material-icons edit">edit</i>
+          </a>
+          <button (click)="ApareceCard(element.codigo)" class="deletebtn">
+            <i class="material-icons delete">delete</i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 2, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+
+    <button routerLink="/createproduto" class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': corBotao }">Novo Produto</button>
   </div>
+</div>

@@ -3,8 +3,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { ToastrService } from "ngx-toastr";
 import { ZipInCloudService } from "src/app/zip-in-cloud.service";
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {MatSort, Sort} from '@angular/material/sort';
+import { LiveAnnouncer } from "@angular/cdk/a11y";
+import { MatSort, Sort } from "@angular/material/sort";
 
 @Component({
   selector: "app-grupo-list",
@@ -23,38 +23,38 @@ export class GrupoListComponent implements OnInit {
   IsDisabled: boolean = false;
   codigoExclu: any = "";
   displayedColumns: string[] = ["grupo", "deS_", "acoes"];
-  dataSource = new MatTableDataSource(this.grupos.results); 
-  corBotao = localStorage.getItem('corBotao');
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource(this.grupos.results);
+  corBotao = localStorage.getItem("corBotao");
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
-    this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-  } else {
-    this._liveAnnouncer.announce('Sorting cleared');
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce("Sorting cleared");
+    }
   }
-}
 
-ApareceCard(Codigo:any) {
-  this.DisplayBack = "block";
-  this.DisplayCard = "block"
-  this.AnimacaoBack = "apareceBack 500ms ease-in"
-  this.AnimacaoCard = "apareceTexto 500ms ease-in"
-  this.IsDisabled = false;
-  this.codigoExclu = Codigo
-  console.log(this.codigoExclu)
-}
+  ApareceCard(Codigo: any) {
+    this.DisplayBack = "block";
+    this.DisplayCard = "block";
+    this.AnimacaoBack = "apareceBack 500ms ease-in";
+    this.AnimacaoCard = "apareceTexto 500ms ease-in";
+    this.IsDisabled = false;
+    this.codigoExclu = Codigo;
+    console.log(this.codigoExclu);
+  }
 
-Cancelar() {
-  this.AnimacaoBack = "someBack 500ms ease-in"
-  this.AnimacaoCard = "someTexto 500ms ease-in"
-  this.IsDisabled = true;
-  setTimeout(() => {
-    this.DisplayBack = "none";
-    this.DisplayCard = "none";
-  }, 500)
-}
+  Cancelar() {
+    this.AnimacaoBack = "someBack 500ms ease-in";
+    this.AnimacaoCard = "someTexto 500ms ease-in";
+    this.IsDisabled = true;
+    setTimeout(() => {
+      this.DisplayBack = "none";
+      this.DisplayCard = "none";
+    }, 500);
+  }
 
   async ngOnInit() {
     await this.api.obterString().then((data) => {
@@ -63,8 +63,8 @@ Cancelar() {
       console.log(this.string);
     });
 
-    const filtroPag = document.getElementsByClassName("mat-paginator-page-size-label")[0].innerHTML = "Itens por pagina: "
-    console.log(filtroPag)
+    const filtroPag = (document.getElementsByClassName("mat-paginator-page-size-label")[0].innerHTML = "Itens por pagina: ");
+    console.log(filtroPag);
 
     await this.api.obterGrupos().then((data) => {
       this.grupos = data;
@@ -88,13 +88,13 @@ Cancelar() {
     await this.api.grupoDelete(codigo);
     await this.toast.success("Grupo Deletado :)");
 
-    this.AnimacaoBack = "someBack 500ms ease-in"
-    this.AnimacaoCard = "someTexto 500ms ease-in"
+    this.AnimacaoBack = "someBack 500ms ease-in";
+    this.AnimacaoCard = "someTexto 500ms ease-in";
     this.IsDisabled = true;
     setTimeout(() => {
       this.DisplayBack = "none";
       this.DisplayCard = "none";
-    }, 500)
+    }, 500);
 
     await this.api.obterGrupos().then((data) => {
       this.grupos = data;

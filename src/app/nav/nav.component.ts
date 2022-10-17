@@ -9,11 +9,11 @@ import { Router } from "@angular/router";
 export class NavComponent implements OnInit {
   constructor(private router: Router) {}
 
-  isAdmin: boolean;
-  corMenu = localStorage.getItem('corMenu');
-  corIcone = localStorage.getItem('corIcone');
-  corFundo = localStorage.getItem('corFundo');
-  corBotao = localStorage.getItem('corBotao')
+  isAdmin!: boolean;
+  corMenu = localStorage.getItem("corMenu");
+  corIcone = localStorage.getItem("corIcone");
+  corFundo = localStorage.getItem("corFundo");
+  corBotao = localStorage.getItem("corBotao");
 
   ngOnInit(): void {
     this.router.navigate(["home"]);
