@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
-import { ZipInCloudService } from '../zip-in-cloud.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { environment } from "src/environments/environment";
+import { ZipInCloudService } from "../zip-in-cloud.service";
 
 @Component({
-  selector: 'app-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.css']
+  selector: "app-config",
+  templateUrl: "./config.component.html",
+  styleUrls: ["./config.component.css"],
 })
 export class ConfigComponent implements OnInit {
+  copyright: string = environment.copyright;
 
-  constructor(private api: ZipInCloudService, private router: Router, private toast: ToastrService) { }
+  constructor(private api: ZipInCloudService, private router: Router, private toast: ToastrService) {}
 
-
-  corBotao = localStorage.getItem('corBotao');
+  corBotao = localStorage.getItem("corBotao");
   tema: any;
   string: any;
 
@@ -27,7 +27,7 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-  async onSubmit(data: any){
+  async onSubmit(data: any) {
     data.cnpj = environment.cnpj;
     data.tema = this.tema;
     console.log(data);
@@ -42,22 +42,21 @@ export class ConfigComponent implements OnInit {
 
   startTimer() {
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         clearInterval(this.interval);
         location.reload();
       }
-    },500)
+    }, 500);
   }
 
-  selecionarTema(id: any)
-  {
-   this.tema= id;
-   console.log(id);
+  selecionarTema(id: any) {
+    this.tema = id;
+    console.log(id);
   }
 
-  definirTema(){
+  definirTema() {
     if (this.tema == 1) {
       localStorage.setItem("corLogin", "180deg, #Ffc000, #aa8000");
       localStorage.setItem("corMenu", "180deg, #Ffc000, #aa8000");
@@ -91,14 +90,11 @@ export class ConfigComponent implements OnInit {
     }
   }
 
-  checa(id: any){
-    if(id == this.tema)
-    {
+  checa(id: any) {
+    if (id == this.tema) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
-
 }
