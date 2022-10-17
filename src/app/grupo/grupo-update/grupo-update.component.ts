@@ -3,24 +3,21 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { ZipInCloudService } from "src/app/zip-in-cloud.service";
 import { ActivatedRoute } from "@angular/router";
-
+import { environment } from "src/environments/environment";
 @Component({
   selector: "app-grupo-update",
   templateUrl: "./grupo-update.component.html",
   styleUrls: ["./grupo-update.component.css"],
 })
 export class GrupoUpdateComponent implements OnInit {
-  constructor(
-    private api: ZipInCloudService,
-    private toast: ToastrService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  copyright: string = environment.copyright;
+
+  constructor(private api: ZipInCloudService, private toast: ToastrService, private route: ActivatedRoute, private router: Router) {}
 
   string: any;
   grupo: any = "";
-  IsDisabled: boolean = false
-  corBotao = localStorage.getItem('corBotao');
+  IsDisabled: boolean = false;
+  corBotao = localStorage.getItem("corBotao");
 
   async ngOnInit() {
     await this.api.obterString().then((data) => {
@@ -29,12 +26,10 @@ export class GrupoUpdateComponent implements OnInit {
       console.log(this.string);
     });
 
-    await this.api
-      .grupoPorCodigo(this.route.snapshot.paramMap.get("grupo"))
-      .then((data) => {
-        this.grupo = data;
-        console.log(this.grupo);
-      });
+    await this.api.grupoPorCodigo(this.route.snapshot.paramMap.get("grupo")).then((data) => {
+      this.grupo = data;
+      console.log(this.grupo);
+    });
   }
 
   async onSubmit(data: any) {
@@ -44,10 +39,10 @@ export class GrupoUpdateComponent implements OnInit {
       this.toast.error("Insira todos os dados", "O Cadastro Falhou :(");
     } else {
       await this.api.obterString();
-      this.IsDisabled = true
+      this.IsDisabled = true;
       await this.api.alterarGrupo(data);
       this.toast.success("Grupo Alterado :)");
-      this.startTimer()
+      this.startTimer();
     }
   }
 
@@ -56,12 +51,12 @@ export class GrupoUpdateComponent implements OnInit {
 
   startTimer() {
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         clearInterval(this.interval);
         this.router.navigate(["/listgrupo"]);
       }
-    },1000)
+    }, 1000);
   }
 }

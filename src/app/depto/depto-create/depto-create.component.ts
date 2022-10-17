@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { ZipInCloudService } from "src/app/zip-in-cloud.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-depto-create",
@@ -9,11 +10,9 @@ import { ZipInCloudService } from "src/app/zip-in-cloud.service";
   styleUrls: ["./depto-create.component.css"],
 })
 export class DeptoCreateComponent implements OnInit {
-  constructor(
-    private api: ZipInCloudService,
-    private toast: ToastrService,
-    private router: Router
-  ) {}
+  copyright: string = environment.copyright;
+
+  constructor(private api: ZipInCloudService, private toast: ToastrService, private router: Router) {}
 
   IsDisabled: boolean = false;
   corBotao = localStorage.getItem("corBotao");
@@ -38,10 +37,7 @@ export class DeptoCreateComponent implements OnInit {
         this.toast.success("Departamento Cadastrado :)");
         this.startTimer();
       } else {
-        this.toast.error(
-          "Um departamento com esse código ja existe",
-          "O Cadastro Falhou :("
-        );
+        this.toast.error("Um departamento com esse código ja existe", "O Cadastro Falhou :(");
       }
     }
   }
