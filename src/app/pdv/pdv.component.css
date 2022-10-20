@@ -26,6 +26,9 @@
     color: rgb(0, 153, 255);
   }
   
+  .add{
+    color: rgb(32, 131, 56);
+  }
   .delete {
     color: red;
   }

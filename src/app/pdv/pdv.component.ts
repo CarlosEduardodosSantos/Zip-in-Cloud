@@ -31,8 +31,8 @@ export class PdvComponent implements OnInit {
   total: any = 0.00;
   corBotao = localStorage.getItem("corBotao");
 
-  displayedColumns: string[] = ["codigo", "deS_", "qtdE1", "vlvenda", "ativo", "imagem", "acoes"];
-  displayedColumns2: string[] = ["deS_", "vlvenda", "acoes","subtotal","remover"];
+  displayedColumns: string[] = ["codigo", "deS_", "qtdE1", "vlvenda", "imagem", "quantidade","acoes"];
+  displayedColumns2: string[] = ["deS_", "vlvenda","subtotal", "acoes","remover"];
   dataSource = new MatTableDataSource(this.produts.results);
   dataSource2 = new MatTableDataSource(this.carrinho);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -165,15 +165,15 @@ export class PdvComponent implements OnInit {
     w!.document.write(image.outerHTML);
   }
 
-  alimentarCarrinho(codigo: any, desc: any, vlunit: any)
+  alimentarCarrinho(codigo: any, desc: any, vlunit: any, qtde:any)
   {
     var objIndex = this.carrinho.findIndex((obj => obj.codigo == codigo));
     console.log(this.carrinho[objIndex]);
     if(this.carrinho[objIndex] == undefined)
     {
-    var obj = {codigo: codigo, deS_: desc, vlvenda: vlunit, quantidade: 1, subtotal: vlunit}
+    var obj = {codigo: codigo, deS_: desc, vlvenda: vlunit, quantidade: qtde, subtotal: vlunit * qtde}
     this.carrinho.push(obj);
-    this.total += vlunit;
+    this.total += vlunit*qtde;
     console.log(this.carrinho);
     this.dataSource2 = new MatTableDataSource(this.carrinho);
     console.log(this.dataSource2);
@@ -186,7 +186,7 @@ export class PdvComponent implements OnInit {
     }
   }
 
-  async mudaQuantidade(id: any, qtde: any, operacao:any, vlunit:any)
+  async mudaQuantidadeItens(id: any, qtde: any, operacao:any, vlunit:any)
   {
     var objIndex = this.carrinho.findIndex((obj => obj.codigo == id));
     console.log(this.carrinho[objIndex]);
@@ -206,11 +206,28 @@ export class PdvComponent implements OnInit {
     }
   }
 
+  async mudaQuantidade(id: any, qtde: any, operacao:any, vlunit:any)
+  {
+    var objIndex = this.produts.results.findIndex(((obj: { codigo: any; }) => obj.codigo == id));
+    console.log(this.produts.results[objIndex]);
+    if(operacao == 1)
+    {
+     this.produts.results[objIndex].qtdeP = qtde + 1;
+    }
+    else if(operacao == 2 && qtde >1){
+      this.produts.results[objIndex].qtdeP = qtde - 1;
+    }
+    else{
+      this.toast.error("A quantidade não pode ser menor que 1! :(");
+    }
+  }
+
   deletaCarrinho(id: any, subtotal: any)
   {
     var objIndex = this.carrinho.findIndex((obj => obj.codigo == id));
     if (objIndex !== -1) {
       this.carrinho.splice(objIndex, 1);
+      //total
       this.total -= subtotal;
       console.log(this.carrinho);
       this.dataSource2 = new MatTableDataSource(this.carrinho);
