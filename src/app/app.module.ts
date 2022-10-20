@@ -54,6 +54,7 @@ import { DeptoCreateComponent } from './depto/depto-create/depto-create.componen
 import { DeptoUpdateComponent } from './depto/depto-update/depto-update.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import { PdvComponent } from './pdv/pdv.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -89,6 +90,7 @@ const maskConfig: Partial<IConfig> = {
     DeptoListComponent,
     DeptoCreateComponent,
     DeptoUpdateComponent,
+    PdvComponent,
   ],
   imports: [
     BrowserModule,

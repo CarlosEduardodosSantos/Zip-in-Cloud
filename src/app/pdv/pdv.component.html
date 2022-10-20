@@ -1,0 +1,124 @@
+<div class="Exclusao" [style.display]="DisplayBack" [style.animation]="AnimacaoBack"></div>
+
+<div class="CardBox" [style.display]="DisplayCard" [style.animation]="AnimacaoCard">
+  <h1 class="Texto">
+    Tem Certeza Que Deseja Fazer <br />
+    A Exclusão Desse Registro?
+  </h1>
+  <button class="ConfirmarExclu" mat-stroked-button [disabled]="IsDisabled" (click)="deletar(codigoExclu)">Confirmar</button>
+
+  <button class="CancelarExclu" mat-stroked-button (click)="Cancelar()" [disabled]="IsDisabled">Cancelar</button>
+</div>
+
+<div class="container">
+  <h1>Realizar Venda</h1>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Pesquisar Produto por Nome</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Hot Dog" #input />
+  </mat-form-field>
+
+  <div *ngIf="apareceGrid" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+        <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deS_">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.deS_ }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="qtdE1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantidade</th>
+        <td mat-cell *matCellDef="let element">{{ element.qtdE1 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vlvenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
+        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ativo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <mat-checkbox [ngModel]="isAtivo(element.ativo)" disabled></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="imagem">
+        <th mat-header-cell *matHeaderCellDef>Imagem</th>
+        <td mat-cell *matCellDef="let element">
+          <img title="Produto imagem" (click)="abrir(element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg', element.deS_)" class="img-Table" [src]="element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg'" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Adcionar</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="alimentarCarrinho(element.codigo, element.deS_, element.vlvenda)" class="deletebtn">
+            <i class="material-icons add">add</i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+  </div>
+  </div>
+<div class="container">
+    <h1>Itens</h1>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource2" matSort (matSortChange)="announceSortChange($event)">
+
+      <ng-container matColumnDef="deS_">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.deS_ }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="vlvenda">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
+        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+        <td mat-cell *matCellDef="let element">
+            <button (click)="mudaQuantidade(element.codigo,element.quantidade, 2, element.vlvenda)" class="deletebtn">
+                <i class="material-icons delete">remove</i>
+              </button>
+              {{element.quantidade}}
+          <button (click)="mudaQuantidade(element.codigo,element.quantidade, 1, element.vlvenda)" class="deletebtn">
+            <i class="material-icons edit">add</i>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subtotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal</th>
+        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.subtotal) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="remover">
+        <th mat-header-cell *matHeaderCellDef>Remover</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="deletaCarrinho(element.codigo, element.subtotal)" class="deletebtn">
+            <i class="material-icons delete">delete</i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+    </table>
+
+    <mat-paginator style="display: none;" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+    <mat-card><h1>Total:{{converterCurrency(total)}}</h1></mat-card>
+    <button  class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': corBotao }">Finalizar Venda</button>
+  </div>
+</div>

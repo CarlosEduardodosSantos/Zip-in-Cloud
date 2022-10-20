@@ -64,10 +64,10 @@ export class ConfigComponent implements OnInit {
       localStorage.setItem("corIcone", "#Ffc000");
       localStorage.setItem("corFundo", "#fff9e6");
     } else if (this.tema == 2) {
-      localStorage.setItem("corLogin", "180deg, #cbcbcb, #8e8e8e");
-      localStorage.setItem("corMenu", "180deg, #cbcbcb, #8e8e8e");
-      localStorage.setItem("corBotao", "#666666");
-      localStorage.setItem("corIcone", "#cbcbcb");
+      localStorage.setItem("corLogin", "180deg, #00B0FF, #2F2E41");
+      localStorage.setItem("corMenu", "180deg, #00B0FF, #2F2E41");
+      localStorage.setItem("corBotao", "#2F2E41");
+      localStorage.setItem("corIcone", "#2F2E41");
       localStorage.setItem("corFundo", "#fafafa");
     } else if (this.tema == 3) {
       localStorage.setItem("corLogin", "180deg, #2b2b2b, #141414");

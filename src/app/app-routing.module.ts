@@ -26,6 +26,7 @@ import { SecaoUpdateComponent } from "./secao/secao-update/secao-update.componen
 import { DeptoListComponent } from "./depto/depto-list/depto-list.component";
 import { DeptoCreateComponent } from "./depto/depto-create/depto-create.component";
 import { DeptoUpdateComponent } from "./depto/depto-update/depto-update.component";
+import { PdvComponent } from "./pdv/pdv.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -57,6 +58,7 @@ const routes: Routes = [
       { path: "listdepto", component: DeptoListComponent },
       { path: "createdepto", component: DeptoCreateComponent },
       { path: "updatedepto/:codigo", component: DeptoUpdateComponent },
+      {path: "PDV", component: PdvComponent}
     ],
   },
 ];
