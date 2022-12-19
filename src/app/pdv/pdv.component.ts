@@ -18,6 +18,7 @@ export class PdvComponent implements OnInit {
 
   string: any;
   produts: any = "";
+  productsgroups: any = "";
   grupos: any = "";
   grupo: any = "";
   carrinho: carrinho[] = [];
@@ -28,6 +29,7 @@ export class PdvComponent implements OnInit {
   IsDisabled: boolean = false;
   codigoExclu: any = "";
   apareceGrid: any = false;
+  apareceGrid2: any = false;
   total: any = 0.00;
   corBotao = localStorage.getItem("corBotao");
 
@@ -35,6 +37,7 @@ export class PdvComponent implements OnInit {
   displayedColumns2: string[] = ["deS_", "vlvenda","subtotal", "acoes","remover"];
   dataSource = new MatTableDataSource(this.produts.results);
   dataSource2 = new MatTableDataSource(this.carrinho);
+  dataSource3 = new MatTableDataSource(this.productsgroups.results);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -80,7 +83,7 @@ export class PdvComponent implements OnInit {
     await this.api.obterGrupos().then((data) => {
       this.grupos = data;
 
-      console.log(this.grupos);
+      console.log('grupineos',this.grupos);
     });
 
     await this.api.obterProds().then((data) => {
@@ -103,6 +106,7 @@ export class PdvComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
+    this.apareceGrid2 = false;
     const filterValue = (event.target as HTMLInputElement).value;
     if(filterValue.trim().toLowerCase() == "")
     {
@@ -113,6 +117,16 @@ export class PdvComponent implements OnInit {
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log(filterValue.trim().toLowerCase());
+  }
+
+  async applyFilterGrid(grupo: any) {
+    await this.api.prodPorGrupo(grupo).then((data) => {
+      this.productsgroups = data;
+    this.apareceGrid2 = true;
+    this.dataSource3 = new MatTableDataSource(this.productsgroups.results);
+    this.dataSource3.paginator = this.paginator;
+    this.dataSource3.sort = this.sort;
+    console.log(this.dataSource3);});
   }
 
   converterCurrency(valor: number) {
@@ -206,16 +220,16 @@ export class PdvComponent implements OnInit {
     }
   }
 
-  async mudaQuantidade(id: any, qtde: any, operacao:any, vlunit:any)
+  async mudaQuantidade(id: any, qtde: any, operacao:any, vlunit:any, obj: any)
   {
-    var objIndex = this.produts.results.findIndex(((obj: { codigo: any; }) => obj.codigo == id));
-    console.log(this.produts.results[objIndex]);
+    var objIndex = obj.findIndex(((obj: { codigo: any; }) => obj.codigo == id));
+    console.log(obj[objIndex]);
     if(operacao == 1)
     {
-     this.produts.results[objIndex].qtdeP = qtde + 1;
+     obj[objIndex].qtdeP = qtde + 1;
     }
     else if(operacao == 2 && qtde >1){
-      this.produts.results[objIndex].qtdeP = qtde - 1;
+      obj[objIndex].qtdeP = qtde - 1;
     }
     else{
       this.toast.error("A quantidade não pode ser menor que 1! :(");

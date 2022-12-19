@@ -54,6 +54,7 @@ import { DeptoCreateComponent } from './depto/depto-create/depto-create.componen
 import { DeptoUpdateComponent } from './depto/depto-update/depto-update.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import {MatGridListModule} from '@angular/material/grid-list';
 import { PdvComponent } from './pdv/pdv.component';
 
 const maskConfig: Partial<IConfig> = {
@@ -111,6 +112,7 @@ const maskConfig: Partial<IConfig> = {
     MatListModule,
     MatCardModule,
     MatTreeModule,
+    MatGridListModule,
     HttpClientModule,
     FormsModule,
     MatSortModule,

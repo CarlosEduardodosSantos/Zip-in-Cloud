@@ -7,6 +7,18 @@
   table {
     width: 100%;
   }
+  .bot {
+    text-align: center;
+  }
+
+  mat-grid-tile {
+    background: lightblue;
+    cursor: pointer;
+  }
+
+  mat-grid-tile:hover {
+    background: powderblue;
+  }
   
   mat-form-field {
     width: 100%;

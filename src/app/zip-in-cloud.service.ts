@@ -249,6 +249,15 @@ export class ZipInCloudService {
       });
   }
 
+  prodPorGrupo(grupo: any) {
+    return this.http
+      .get(`${environment.url}PROD/obterPorGrupo/${grupo}`)
+      .toPromise()
+      .then((res) => {
+        return res;
+      });
+  }
+
   prodPorCodigo(codigo: any) {
     return this.http
       .get(`${environment.url}PROD/obterPorCodigo/${codigo}`)
