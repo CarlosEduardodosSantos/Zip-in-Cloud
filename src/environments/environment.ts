@@ -5,9 +5,11 @@
 export const environment = {
   production: false,
   url: "https://localhost:44371/api/",
+  consumoUrl: "http://localhost:56435/api/",
   //url: "https://z-api666.herokuapp.com/api/",
   //cnpj: "32759021000181",
   cnpj: "666",
+  resId: 66,
   nomeEmpresa: "Il Capo",
   versao: "e-ticket",
   copyright: "Powered By: ZiP Software © " + new Date().getFullYear(),

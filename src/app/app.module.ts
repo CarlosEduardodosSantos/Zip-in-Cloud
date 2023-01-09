@@ -56,6 +56,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { PdvComponent } from './pdv/pdv.component';
+import { ConsumoModalComponent } from './consumo-modal/consumo-modal.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -92,6 +94,7 @@ const maskConfig: Partial<IConfig> = {
     DeptoCreateComponent,
     DeptoUpdateComponent,
     PdvComponent,
+    ConsumoModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,6 +122,7 @@ const maskConfig: Partial<IConfig> = {
     ColorPickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     NgxMaskModule.forRoot(maskConfig),
     ToastrModule.forRoot({timeOut:2000, closeButton:true, progressBar:true}),
     ConfirmationPopoverModule.forRoot({confirmButtonType: 'danger'}),

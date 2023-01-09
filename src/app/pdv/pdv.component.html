@@ -1,25 +1,58 @@
-<div class="Exclusao" [style.display]="DisplayBack" [style.animation]="AnimacaoBack"></div>
+<div
+  class="Exclusao"
+  [style.display]="DisplayBack"
+  [style.animation]="AnimacaoBack"
+></div>
 
-<div class="CardBox" [style.display]="DisplayCard" [style.animation]="AnimacaoCard">
+<div
+  class="CardBox"
+  [style.display]="DisplayCard"
+  [style.animation]="AnimacaoCard"
+>
   <h1 class="Texto">
     Tem Certeza Que Deseja Fazer <br />
     A Exclusão Desse Registro?
   </h1>
-  <button class="ConfirmarExclu" mat-stroked-button [disabled]="IsDisabled" (click)="deletar(codigoExclu)">Confirmar</button>
+  <button
+    class="ConfirmarExclu"
+    mat-stroked-button
+    [disabled]="IsDisabled"
+    (click)="deletar(codigoExclu)"
+  >
+    Confirmar
+  </button>
 
-  <button class="CancelarExclu" mat-stroked-button (click)="Cancelar()" [disabled]="IsDisabled">Cancelar</button>
+  <button
+    class="CancelarExclu"
+    mat-stroked-button
+    (click)="Cancelar()"
+    [disabled]="IsDisabled"
+  >
+    Cancelar
+  </button>
 </div>
 
 <div class="container">
-  <h1>Realizar Venda</h1>
+  <h1>Realizar Venda<i class="material-icons">attach_money</i></h1>
 
   <mat-form-field appearance="standard">
     <mat-label>Pesquisar Produto por Nome</mat-label>
-    <input matInput (click)="this.apareceGrid2 = false;" (keyup)="applyFilter($event)" placeholder="Ex. Hot Dog" #input />
+    <input
+      matInput
+      (click)="this.apareceGrid2 = false"
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Hot Dog"
+      #input
+    />
   </mat-form-field>
 
   <div *ngIf="apareceGrid" class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
       <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
         <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
@@ -36,32 +69,77 @@
       </ng-container>
 
       <ng-container matColumnDef="vlvenda">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
-        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Valor de Venda
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ converterCurrency(element.vlvenda) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="ativo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <mat-checkbox [ngModel]="isAtivo(element.ativo)" disabled></mat-checkbox>
+          <mat-checkbox
+            [ngModel]="isAtivo(element.ativo)"
+            disabled
+          ></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="imagem">
         <th mat-header-cell *matHeaderCellDef>Imagem</th>
         <td mat-cell *matCellDef="let element">
-          <img title="Produto imagem" (click)="abrir(element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg', element.deS_)" class="img-Table" [src]="element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg'" />
+          <img
+            title="Produto imagem"
+            (click)="
+              abrir(
+                element.prod_img !== null
+                  ? 'data:image/png;base64,' + element.prod_img
+                  : '/assets/semimagem.jpg',
+                element.deS_
+              )
+            "
+            class="img-Table"
+            [src]="
+              element.prod_img !== null
+                ? 'data:image/png;base64,' + element.prod_img
+                : '/assets/semimagem.jpg'
+            "
+          />
         </td>
       </ng-container>
 
       <ng-container matColumnDef="quantidade">
         <th mat-header-cell *matHeaderCellDef>Quantidade</th>
         <td mat-cell *matCellDef="let element">
-            <button (click)="mudaQuantidade(element.codigo,element.qtdeP, 2, element.vlvenda, this.produts.results)" class="deletebtn">
-                <i class="material-icons delete">remove</i>
-              </button>
-              {{element.qtdeP}}
-          <button (click)="mudaQuantidade(element.codigo,element.qtdeP, 1, element.vlvenda, this.produts.results)" class="deletebtn">
+          <button
+            (click)="
+              mudaQuantidade(
+                element.codigo,
+                element.qtdeP,
+                2,
+                element.vlvenda,
+                this.produts.results
+              )
+            "
+            class="deletebtn"
+          >
+            <i class="material-icons delete">remove</i>
+          </button>
+          {{ element.qtdeP }}
+          <button
+            (click)="
+              mudaQuantidade(
+                element.codigo,
+                element.qtdeP,
+                1,
+                element.vlvenda,
+                this.produts.results
+              )
+            "
+            class="deletebtn"
+          >
             <i class="material-icons edit">add</i>
           </button>
         </td>
@@ -70,7 +148,17 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Adicionar</th>
         <td mat-cell *matCellDef="let element">
-          <button (click)="alimentarCarrinho(element.codigo, element.deS_, element.vlvenda, element.qtdeP)" class="deletebtn">
+          <button
+            (click)="
+              alimentarCarrinho(
+                element.codigo,
+                element.deS_,
+                element.vlvenda,
+                element.qtdeP
+              )
+            "
+            class="deletebtn"
+          >
             <i class="material-icons add">add</i>
           </button>
         </td>
@@ -80,18 +168,28 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15]"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
-  
+
   <mat-grid-list *ngIf="!apareceGrid" cols="4" rowHeight="6:1">
-    <mat-grid-tile (click)="applyFilterGrid(tile.grupo);" *ngFor="let tile of grupos.results">
-     {{tile.deS_}}
+    <mat-grid-tile
+      (click)="applyFilterGrid(tile.grupo)"
+      *ngFor="let tile of grupos.results"
+    >
+      {{ tile.deS_ }}
     </mat-grid-tile>
   </mat-grid-list>
 
   <div *ngIf="apareceGrid2" class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource3" matSort (matSortChange)="announceSortChange($event)">
+    <table
+      mat-table
+      [dataSource]="dataSource3"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
       <ng-container matColumnDef="codigo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
         <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
@@ -108,32 +206,77 @@
       </ng-container>
 
       <ng-container matColumnDef="vlvenda">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor de Venda</th>
-        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Valor de Venda
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ converterCurrency(element.vlvenda) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="ativo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ativo</th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <mat-checkbox [ngModel]="isAtivo(element.ativo)" disabled></mat-checkbox>
+          <mat-checkbox
+            [ngModel]="isAtivo(element.ativo)"
+            disabled
+          ></mat-checkbox>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="imagem">
         <th mat-header-cell *matHeaderCellDef>Imagem</th>
         <td mat-cell *matCellDef="let element">
-          <img title="Produto imagem" (click)="abrir(element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg', element.deS_)" class="img-Table" [src]="element.prod_img !== null ? 'data:image/png;base64,' + element.prod_img : '/assets/semimagem.jpg'" />
+          <img
+            title="Produto imagem"
+            (click)="
+              abrir(
+                element.prod_img !== null
+                  ? 'data:image/png;base64,' + element.prod_img
+                  : '/assets/semimagem.jpg',
+                element.deS_
+              )
+            "
+            class="img-Table"
+            [src]="
+              element.prod_img !== null
+                ? 'data:image/png;base64,' + element.prod_img
+                : '/assets/semimagem.jpg'
+            "
+          />
         </td>
       </ng-container>
 
       <ng-container matColumnDef="quantidade">
         <th mat-header-cell *matHeaderCellDef>Quantidade</th>
         <td mat-cell *matCellDef="let element">
-            <button (click)="mudaQuantidade(element.codigo,element.qtdeP, 2, element.vlvenda, this.productsgroups.results)" class="deletebtn">
-                <i class="material-icons delete">remove</i>
-              </button>
-              {{element.qtdeP}}
-          <button (click)="mudaQuantidade(element.codigo,element.qtdeP, 1, element.vlvenda, this.productsgroups.results)" class="deletebtn">
+          <button
+            (click)="
+              mudaQuantidade(
+                element.codigo,
+                element.qtdeP,
+                2,
+                element.vlvenda,
+                this.productsgroups.results
+              )
+            "
+            class="deletebtn"
+          >
+            <i class="material-icons delete">remove</i>
+          </button>
+          {{ element.qtdeP }}
+          <button
+            (click)="
+              mudaQuantidade(
+                element.codigo,
+                element.qtdeP,
+                1,
+                element.vlvenda,
+                this.productsgroups.results
+              )
+            "
+            class="deletebtn"
+          >
             <i class="material-icons edit">add</i>
           </button>
         </td>
@@ -142,7 +285,17 @@
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Adicionar</th>
         <td mat-cell *matCellDef="let element">
-          <button (click)="alimentarCarrinho(element.codigo, element.deS_, element.vlvenda, element.qtdeP)" class="deletebtn">
+          <button
+            (click)="
+              alimentarCarrinho(
+                element.codigo,
+                element.deS_,
+                element.vlvenda,
+                element.qtdeP
+              )
+            "
+            class="deletebtn"
+          >
             <i class="material-icons add">add</i>
           </button>
         </td>
@@ -152,37 +305,70 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15]"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
-  </div>
+</div>
 <div class="container">
-    <h1>Itens:</h1>
+  <h1>Carrinho<i class="material-icons">shopping_cart</i></h1>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource2" matSort (matSortChange)="announceSortChange($event)">
-
+    <table
+      mat-table
+      [dataSource]="dataSource2"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+    >
       <ng-container matColumnDef="deS_">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
         <td mat-cell *matCellDef="let element">{{ element.deS_ }}</td>
       </ng-container>
 
       <ng-container matColumnDef="vlvenda">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor Unitário</th>
-        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.vlvenda) }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Valor Unitário
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ converterCurrency(element.vlvenda) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="subtotal">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal</th>
-        <td mat-cell *matCellDef="let element">{{ converterCurrency(element.subtotal) }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ converterCurrency(element.subtotal) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef>Quantidade</th>
         <td mat-cell *matCellDef="let element">
-            <button (click)="mudaQuantidadeItens(element.codigo,element.quantidade, 2, element.vlvenda)" class="deletebtn">
-                <i class="material-icons delete">remove</i>
-              </button>
-              {{element.quantidade}}
-          <button (click)="mudaQuantidadeItens(element.codigo,element.quantidade, 1, element.vlvenda)" class="deletebtn">
+          <button
+            (click)="
+              mudaQuantidadeItens(
+                element.codigo,
+                element.quantidade,
+                2,
+                element.vlvenda
+              )
+            "
+            class="deletebtn"
+          >
+            <i class="material-icons delete">remove</i>
+          </button>
+          {{ element.quantidade }}
+          <button
+            (click)="
+              mudaQuantidadeItens(
+                element.codigo,
+                element.quantidade,
+                1,
+                element.vlvenda
+              )
+            "
+            class="deletebtn"
+          >
             <i class="material-icons edit">add</i>
           </button>
         </td>
@@ -191,7 +377,10 @@
       <ng-container matColumnDef="remover">
         <th mat-header-cell *matHeaderCellDef>Remover</th>
         <td mat-cell *matCellDef="let element">
-          <button (click)="deletaCarrinho(element.codigo, element.subtotal)" class="deletebtn">
+          <button
+            (click)="deletaCarrinho(element.codigo, element.subtotal)"
+            class="deletebtn"
+          >
             <i class="material-icons delete">delete</i>
           </button>
         </td>
@@ -201,15 +390,90 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
     </table>
 
-    <mat-paginator style="display: none;" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-    <mat-card><h1>Total:{{converterCurrency(total)}}</h1></mat-card>
-    <br>
+    <mat-paginator
+      style="display: none"
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+    ></mat-paginator>
+    <mat-card
+      ><h1>Total:{{ converterCurrency(total) }}</h1></mat-card
+    >
+    <br />
     <div class="bot">
-    <button style="width:200px; display: inline;"  class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': '#009688'}">À Vista<i class="material-icons">attach_money</i></button>
-    <button style="width:200px; margin-left:20px; display: inline;"  class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': '#35a79c' }">Cartão Débito<i class="material-icons">card_membership</i></button>
-    <button  style="width:200px; margin-left:20px; display: inline;" class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': '#54b2a9 ' }">Cartão Crédito<i class="material-icons">credit_card</i></button>
-    <button  style="width:200px; margin-left:20px; margin-bottom: 20px; display: inline;" class="mat-elevation-z8" mat-stroked-button [ngStyle]="{ 'background-color': '#65c3ba' }">Cartão Consumo<i class="material-icons">card_giftcard</i></button>
-    <br>
-    </div>  
+      <button
+        style="width: 200px; display: inline"
+        class="mat-elevation-z8"
+        mat-stroked-button
+        [ngStyle]="{ 'background-color': '#009688' }"
+      >
+        À Vista<i class="material-icons">attach_money</i>
+      </button>
+      <button
+        style="width: 200px; margin-left: 20px; display: inline"
+        class="mat-elevation-z8"
+        mat-stroked-button
+        [ngStyle]="{ 'background-color': '#35a79c' }"
+      >
+        Cartão Débito<i class="material-icons">card_membership</i>
+      </button>
+      <button
+        style="width: 200px; margin-left: 20px; display: inline"
+        class="mat-elevation-z8"
+        mat-stroked-button
+        [ngStyle]="{ 'background-color': '#54b2a9 ' }"
+      >
+        Cartão Crédito<i class="material-icons">credit_card</i>
+      </button>
+      <button
+        (click)="consumoShow()"
+        style="
+          width: 200px;
+          margin-left: 20px;
+          margin-bottom: 20px;
+          display: inline;
+        "
+        class="mat-elevation-z8"
+        mat-stroked-button
+        [ngStyle]="{ 'background-color': '#65c3ba' }"
+      >
+        Cartão Consumo<i class="material-icons">card_giftcard</i>
+      </button>
+      <br />
+    </div>
   </div>
+</div>
+<div #zica id="zica" *ngIf="apareceConsumo" class="container">
+  <mat-card>
+    <mat-card-header> Cartão Consumo </mat-card-header>
+    <mat-card-content>
+      <form
+        class="form"
+        #consumo="ngForm"
+        (ngSubmit)="onSubmit(consumo.value)"
+        enctype="multipart/form-data"
+      >
+        <mat-form-field class="example-full-width">
+          <mat-label>Número do Cartão:</mat-label>
+          <input
+            #cardN
+            id="cardN"
+            name="numero"
+            [(ngModel)]='numero'
+            required
+            matInput
+            placeholder="Ex. 12345"
+          />
+        </mat-form-field>
+        <button
+          type="submit"
+          class="fullWidth mat-elevation-z4"
+          mat-flat-button
+          [ngStyle]="{ 'background-color': corBotao }"
+          [disabled]="IsDisabled"
+        >
+          Finalizar Venda
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

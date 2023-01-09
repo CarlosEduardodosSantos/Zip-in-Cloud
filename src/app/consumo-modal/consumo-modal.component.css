@@ -14,7 +14,10 @@
   .bot {
     text-align: center;
   }
-
+mat-list-item{
+    width: 100%;
+    text-align: justify;
+}
   mat-grid-tile {
     background: lightblue;
     cursor: pointer;
@@ -23,7 +26,12 @@
   mat-grid-tile:hover {
     background: powderblue;
   }
-  
+  .section {
+    margin-bottom: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: space-between;
+ }
   mat-form-field {
     width: 100%;
   }
