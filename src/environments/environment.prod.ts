@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  url: "https://z-api666.herokuapp.com/api/",
+  url: "https://apizipincloud.zclub.com.br/api/",
+  consumoUrl: "http://api.zclub.com.br/api/",
   cnpj: "666",
   nomeEmpresa: "Il Capo",
   versao: "e-ticket",
